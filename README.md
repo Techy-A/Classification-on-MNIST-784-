@@ -1,31 +1,70 @@
-# 🖼️ MNIST-784 Classification  
+# MNIST Digit Classification
 
-This project applies **machine learning models** to classify handwritten digits (0–9) from the **MNIST-784 dataset**. Each image is 28×28 pixels, flattened into 784 features.  
+![Python](https://img.shields.io/badge/Python-3-3776AB?style=flat-square&logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
+![Multiclass accuracy](https://img.shields.io/badge/multiclass%20accuracy-~90%25-2c9fbf?style=flat-square)
+![Random Forest ROC-AUC](https://img.shields.io/badge/RF%20ROC--AUC-0.998-2c9fbf?style=flat-square)
 
-## 🚀 Features  
-- Data loading using `fetch_openml`  
-- Preprocessing and normalization of images  
-- Model training with `SGDClassifier` and other scikit-learn algorithms  
-- Cross-validation and performance evaluation  
-- Visualization with Matplotlib  
+Handwritten digit classification on MNIST-784 (70,000 images of 28 x 28 pixels, flattened to 784 features) with classical scikit-learn models. The notebook works through the full classification toolkit: binary and multiclass classifiers, cross-validation, precision and recall trade-offs, ROC curves, error analysis, and multilabel and multioutput classification.
 
-## 📊 Results  
-- Achieved **high accuracy** on test set  
-- Evaluation via confusion matrix, precision, recall, and F1-score  
+## Results
 
-## 🛠️ Tech Stack  
-- **Python 3**  
-- **NumPy, Matplotlib, scikit-learn**  
+All numbers are 3-fold cross-validation on the 60,000 training images.
 
-## 📂 Project Structure  
-- `Classification.ipynb` → Jupyter Notebook with full workflow  
-- `README.md` → Project description  
+**Binary task: "is this digit a 5?"**
 
-## 🔮 Future Improvements  
-- Add Convolutional Neural Networks (CNNs) using TensorFlow/PyTorch  
-- Hyperparameter tuning for better accuracy  
-- Experiment with other datasets  
+| Model | Metric | Score |
+|:--|:--|:--|
+| SGD classifier | Accuracy | 0.950 to 0.960 |
+| SGD classifier | Precision / Recall / F1 | 0.837 / 0.651 / 0.733 |
+| SGD classifier, threshold tuned for 90% precision | Precision / Recall | 0.900 / 0.480 |
+| SGD classifier | ROC-AUC | 0.960 |
+| **Random Forest** | **ROC-AUC** | **0.998** |
+
+**Multiclass task: all 10 digits**
+
+| Model | Accuracy |
+|:--|:--|
+| SGD classifier, raw pixels | 0.859 to 0.874 |
+| **SGD classifier, standardised pixels** | **0.891 to 0.902** |
+
+**Multilabel task: "is the digit 7 or larger?" and "is it odd?"**
+
+| Model | Macro F1 |
+|:--|:--|
+| k-nearest neighbours | **0.976** |
+
+## What the notebook covers
+
+- **Loading:** MNIST via `fetch_openml`, 60,000 / 10,000 train-test split
+- **Binary classification:** an SGD "5 detector" trained and scored with cross-validation
+- **Precision vs recall:** confusion matrix, precision-recall curve, choosing a threshold for 90% precision
+- **ROC curves:** SGD compared with Random Forest
+- **Multiclass:** SVC (one-vs-one), one-vs-rest SVC and SGD, with feature scaling
+- **Error analysis:** a normalised confusion matrix, showing that 8s and 3/5 confusions dominate the errors
+- **Multilabel and multioutput:** k-NN for two labels at once, and a denoising model that cleans noisy digit images
+
+## Run it
+
+```bash
+pip install numpy matplotlib scikit-learn jupyter
+jupyter notebook Classification.ipynb
+```
+
+The SVC cells train on all 60,000 images and take several minutes on a laptop.
+
+## Files
+
+| File | Purpose |
+|:--|:--|
+| `Classification.ipynb` | The full workflow, from data loading to multioutput classification |
+
+## Next steps
+
+- A small CNN in PyTorch, which typically reaches 99% or more on MNIST
+- Hyperparameter search for the SVC and k-NN models
+- Data augmentation by shifting images a pixel in each direction
 
 ---
 
-⚡ *MNIST is the “Hello World” of computer vision. This project demonstrates the basics of digit classification using classical ML models.*  
+<sub>Built by [Aryan Awasthi](https://github.com/Techy-A). ENC @ Thapar Institute of Engineering and Technology.</sub>
