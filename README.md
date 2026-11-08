@@ -1,9 +1,10 @@
-# MNIST Digit Classification
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="MNIST Digit Classification: classical scikit-learn models on 70,000 handwritten digits, with a 5 detector at ROC-AUC 0.998 and about 90 percent ten-digit accuracy.">
+</p>
 
-![Python](https://img.shields.io/badge/Python-3-3776AB?style=flat-square&logo=python&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
-![Multiclass accuracy](https://img.shields.io/badge/multiclass%20accuracy-~90%25-2c9fbf?style=flat-square)
-![Random Forest ROC-AUC](https://img.shields.io/badge/RF%20ROC--AUC-0.998-2c9fbf?style=flat-square)
+<p align="center">
+  <a href="#results"><b>Results</b></a> &nbsp;·&nbsp; <a href="#what-the-notebook-covers"><b>What it covers</b></a>
+</p>
 
 Handwritten digit classification on MNIST-784 (70,000 images of 28 x 28 pixels, flattened to 784 features) with classical scikit-learn models. The notebook works through the full classification toolkit: binary and multiclass classifiers, cross-validation, precision and recall trade-offs, ROC curves, error analysis, and multilabel and multioutput classification.
 
